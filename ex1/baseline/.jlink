@@ -1,0 +1,2 @@
+device EFM32GG990F1024
+if SWD

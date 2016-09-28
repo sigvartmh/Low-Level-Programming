@@ -1,0 +1,7 @@
+
+T402886C0 000:000 SEGGER J-Link V4.80 Log File (0000ms, 0000ms total)
+T402886C0 000:000 DLL Compiled: Dec 20 2013 19:40:14 (0000ms, 0000ms total)
+T402886C0 000:000 Logging started @ 2016-09-19 14:21 (0000ms, 0000ms total)
+T402886C0 000:000 JLINK_SetWarnOutHandler(...) (0000ms, 0000ms total)
+T402886C0 000:000 JLINK_SelectUSB(Port = 0)  returns 0x00 (0000ms, 0000ms total)
+T402886C0 000:000 JLINK_OpenEx(...)
