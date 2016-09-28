@@ -1,7 +1,0 @@
-device EFM32GG990F1024
-si 0
-speed 100
-loadbin ex1.bin, 0x00
-r0
-r1
-exit
