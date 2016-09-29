@@ -10,7 +10,7 @@
   registers are 16 bits.
 */
 /* The period between sound samples, in clock cycles */
-#define   SAMPLE_PERIOD   0
+#define   SAMPLE_PERIOD	14000000
 
 /* Declaration of peripheral setup functions */
 void setupGPIO();
@@ -19,9 +19,10 @@ void setupTimer(uint32_t period);
 void setupDAC();
 void setupNVIC();
 
-volatile uint32_t input =0;
+volatile uint32_t input = 0;
 
-void disableRAM(uint8_t type){
+void disableRAM(uint8_t type)
+{
 	*EMU_MEMCTRL = type;
 }
 
@@ -36,11 +37,11 @@ int main(void)
 
 	/* Enable interrupt handling */
 	setupNVIC();
-	disableRAM(0x01); /* Disable RAM-block 2-3 */
+	//disableRAM(0x01); /* Disable RAM-block 2-3 */
 	/* TODO for higher energy efficiency, sleep while waiting for interrupts
 	   instead of infinite loop for busy-waiting
 	 */
-	*SCR = 0x06;
+	//*SCR = 0x06;
 	__asm("wfi");
 	return 0;
 }
@@ -55,6 +56,7 @@ void setupNVIC()
 	   assignment.
 	 */
 	*ISER0 = 0x802;
+	*ISER0 |= (1 << 12);
 }
 
 /* if other interrupt handlers are needed, use the following names: 

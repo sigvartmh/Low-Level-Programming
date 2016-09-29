@@ -3,6 +3,7 @@
 
 #include "efm32gg.h"
 
+uint16_t inc = 0;
 /* TIMER1 interrupt handler */
 void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 {
@@ -10,6 +11,10 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 	   TODO feed new samples to the DAC
 	   remember to clear the pending interrupt by writing 1 to TIMER1_IFC
 	 */
+	*TIMER1_IFC = 0x1;
+	//inc++;
+	(*GPIO_PA_DOUT)++;
+
 }
 
 /* GPIO even pin interrupt handler */
