@@ -10,7 +10,25 @@
   registers are 16 bits.
 */
 /* The period between sound samples, in clock cycles */
-#define   SAMPLE_PERIOD	14000000
+#define   SAMPLE_PERIOD	14
+
+
+#define sampleRate	7*1000000
+#define tone(x) x/sampleRate
+
+#define C5 		tone(523)
+#define B4		tone(494)
+#define Bb4		tone(466)
+#define A4		tone(440)
+#define Ab4		tone(415)
+#define G4		tone(392)
+#define Gb4		tone(370)
+#define F4		tone(349)
+#define E4		tone(330)
+#define Eb4		tone(311)
+#define D4		tone(294)
+#define Db4		tone(277)
+#define C4		tone(262)
 
 /* Declaration of peripheral setup functions */
 void setupGPIO();
@@ -33,7 +51,7 @@ int main(void)
 	setupGPIO();
 	setupGPIOInterrupt();
 	setupDAC();
-	setupTimer(SAMPLE_PERIOD);
+	setupTimer(SAMPLE_PERIOD*0 + C5);
 
 	/* Enable interrupt handling */
 	setupNVIC();
