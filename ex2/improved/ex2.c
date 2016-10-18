@@ -10,25 +10,7 @@
   registers are 16 bits.
 */
 /* The period between sound samples, in clock cycles */
-#define   SAMPLE_PERIOD	14
-
-
-#define sampleRate	7*1000000
-#define tone(x) x/sampleRate
-
-#define C5 		tone(523)
-#define B4		tone(494)
-#define Bb4		tone(466)
-#define A4		tone(440)
-#define Ab4		tone(415)
-#define G4		tone(392)
-#define Gb4		tone(370)
-#define F4		tone(349)
-#define E4		tone(330)
-#define Eb4		tone(311)
-#define D4		tone(294)
-#define Db4		tone(277)
-#define C4		tone(262)
+#define SAMPLE_PERIOD 350
 
 /* Declaration of peripheral setup functions */
 void setupGPIO();
@@ -44,6 +26,7 @@ void disableRAM(uint8_t type)
 	*EMU_MEMCTRL = type;
 }
 
+
 /* Your code will start executing here */
 int main(void)
 {
@@ -51,7 +34,7 @@ int main(void)
 	setupGPIO();
 	setupGPIOInterrupt();
 	setupDAC();
-	setupTimer(SAMPLE_PERIOD*0 + C5);
+	setupTimer(SAMPLE_PERIOD);
 
 	/* Enable interrupt handling */
 	setupNVIC();
@@ -59,7 +42,24 @@ int main(void)
 	/* TODO for higher energy efficiency, sleep while waiting for interrupts
 	   instead of infinite loop for busy-waiting
 	 */
-	//*SCR = 0x06;
+	*SCR = 0x06;
+	
+	//unsigned char *psound = &_binary_ahh_bin_start;
+	//for(;;){
+	//while( psound < &_binary_ahh_bin_end){
+	//	*DAC0_CH0DATA = *psound;
+	//	*DAC0_CH1DATA = *psound;
+	//	psound++;
+	//}
+	//psound = &_binary_ppap_raw_start;
+	//while( psound < &_binary_ppap_raw_end){
+	//	*DAC0_CH0DATA = *psound;
+	//	*DAC0_CH1DATA = *psound;
+	//	psound++;
+	//}
+	//psound = &_binary_ahh_bin_start;
+	//}
+	*GPIO_IFC = 0xff;
 	__asm("wfi");
 	return 0;
 }

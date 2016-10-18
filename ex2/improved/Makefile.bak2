@@ -13,18 +13,12 @@ ASFLAGS=-mcpu=cortex-m3 -mthumb -g
 BINFLAGS= -r -b binary
 OBJFLAGS= --rename-section .data=.rodata 
 LINKERSCRIPT=lib/efm32gg.ld
-RAWDATA=ahhh.raw ahhBig.raw ppap.raw apple.raw pinapple.raw pen.raw ApplePen.raw PinapplePen.raw PPAPfull.raw
-DATAOBJ=ahhh.o ahhBig.o ppap.o apple.o pen.o ApplePen.o pinapple.o PinapplePen.o PPAPfull.o
 
 ex2.bin : ex2.elf
 	${OBJCOPY} -O binary $< $@
 
-ex2.elf : ex2.o timer.o dac.o gpio.o interrupt_handlers.o ${DATAOBJ}
+ex2.elf : ex2.o timer.o dac.o gpio.o interrupt_handlers.o ahhh.o ppap.o
 	${LD} -T ${LINKERSCRIPT} $^ -o $@ ${LDFLAGS}
-
-#${DATAOBJ} : ${RAWDATA} 
-#	${LINK} ${BINFLAGS} $< -o $@ 
-#	${OBJCOPY} ${OBJFLAGS} $@
 
 %.o : %.c
 	${CC} ${CFLAGS} -c $< -o $@
