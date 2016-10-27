@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <stdbool.h>
-
+#include <stdio.h>
 #include "efm32gg.h"
 
 /* 
@@ -9,7 +9,10 @@
   from) runs at 14 MHz by default. Also remember that the timer counter
   registers are 16 bits.
 */
+
 /* The period between sound samples, in clock cycles */
+/* Samples are 8000Hz */
+/* CPU Hz = 48 MHz */
 #define SAMPLE_PERIOD 350
 
 /* Declaration of peripheral setup functions */
@@ -17,6 +20,8 @@ void setupGPIO();
 void setupGPIOInterrupt();
 void setupTimer(uint32_t period);
 void setupDAC();
+void disableDAC();
+void enableDAC();
 void setupNVIC();
 
 volatile uint32_t input = 0;
@@ -34,32 +39,16 @@ int main(void)
 	setupGPIO();
 	setupGPIOInterrupt();
 	setupDAC();
+	enableDAC();
 	setupTimer(SAMPLE_PERIOD);
 
 	/* Enable interrupt handling */
 	setupNVIC();
-	//disableRAM(0x01); /* Disable RAM-block 2-3 */
-	/* TODO for higher energy efficiency, sleep while waiting for interrupts
+	disableRAM(0x07); /* Disable RAM-block 2-3 */
+	/* for higher energy efficiency, sleep while waiting for interrupts
 	   instead of infinite loop for busy-waiting
 	 */
-	*SCR = 0x06;
-	
-	//unsigned char *psound = &_binary_ahh_bin_start;
-	//for(;;){
-	//while( psound < &_binary_ahh_bin_end){
-	//	*DAC0_CH0DATA = *psound;
-	//	*DAC0_CH1DATA = *psound;
-	//	psound++;
-	//}
-	//psound = &_binary_ppap_raw_start;
-	//while( psound < &_binary_ppap_raw_end){
-	//	*DAC0_CH0DATA = *psound;
-	//	*DAC0_CH1DATA = *psound;
-	//	psound++;
-	//}
-	//psound = &_binary_ahh_bin_start;
-	//}
-	*GPIO_IFC = 0xff;
+	*SCR = 0x06;	
 	__asm("wfi");
 	return 0;
 }
@@ -73,8 +62,8 @@ void setupNVIC()
 	   You will need TIMER1, GPIO odd and GPIO even interrupt handling for this
 	   assignment.
 	 */
-	*ISER0 = 0x802;
-	*ISER0 |= (1 << 12);
+	*ISER0 = 0x802;	//Enable GPIO odd and even interrupt handeling
+	*ISER0 |= (1 << 12); //Enable Timer1 interupt
 }
 
 /* if other interrupt handlers are needed, use the following names: 
