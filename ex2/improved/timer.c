@@ -21,5 +21,30 @@ void setupTimer(uint16_t period)
 	*TIMER1_TOP = period;
 	*TIMER1_IEN = 1;
 	*TIMER1_CMD = 1;
+}
 
+void setupLETimer(){
+	/* Enable Low Frequency Clock Tree */
+	*CMU_HFPERCLKEN0 |= 0x200;
+	*CMU_LFACLKEN0   |= (1 << 2);
+	/* 32.768Hz Low Frequency (RC) External Oscillator */
+	// LFXO clock selected
+	*CMU_LFCLKSEL |= (1 << 1);
+	*CMU_OSCENCMD |= 0x100; 
+	/* Low Frequency A Prescaler Register 0 */
+	*CMU_LFAPRESC0 |= (0b101 << 8); //F=LFACLK/32
+	
+	*LETIMER0_CMD = 0x2;
+	*LETIMER0_CTRL |= 0x200;
+	*LETIMER0_COMP0 = 1;
+	*LETIMER0_IFC = 0x1f; 
+	*LETIMER0_IEN = 0x4;
+}
+
+void startLETimer(){
+	*LETIMER0_CMD = 0x1;
+}
+
+void stopLETimer(){
+	*LETIMER0_CMD = 0x2;
 }

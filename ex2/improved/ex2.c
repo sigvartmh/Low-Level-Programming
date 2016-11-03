@@ -20,6 +20,7 @@ void setupGPIO();
 void setupGPIOInterrupt();
 void setupTimer(uint32_t period);
 void setupDAC();
+void setupLETimer();
 void disableDAC();
 void enableDAC();
 void setupNVIC();
@@ -41,6 +42,7 @@ int main(void)
 	setupDAC();
 	enableDAC();
 	setupTimer(SAMPLE_PERIOD);
+	setupLETimer();
 
 	/* Enable interrupt handling */
 	setupNVIC();
@@ -48,7 +50,7 @@ int main(void)
 	/* for higher energy efficiency, sleep while waiting for interrupts
 	   instead of infinite loop for busy-waiting
 	 */
-	*SCR = 0x06;	
+	//*SCR = 0x06; //Enable deepsleep mode EM2	
 	__asm("wfi");
 	return 0;
 }
