@@ -28,7 +28,6 @@ void setupLETimer(){
 	*CMU_HFPERCLKEN0 |= 0x200;
 	*CMU_LFACLKEN0   |= (1 << 2);
 	/* 32.768Hz Low Frequency (RC) External Oscillator */
-	// LFXO clock selected
 	*CMU_LFCLKSEL |= (1 << 1);
 	*CMU_OSCENCMD |= 0x100; 
 	/* Low Frequency A Prescaler Register 0 */

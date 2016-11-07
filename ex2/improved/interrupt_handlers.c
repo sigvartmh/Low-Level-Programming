@@ -3,16 +3,18 @@
 
 #include "efm32gg.h"
 
-void enableDAC();
-void disableDAC();
-void startLETimer();
-void stopLETimer();
+#define SETLED(led) ~(1<<led) << 8
+#define SW1 1
+#define SW2 (1<<1)
+#define SW3 (1<<2)
+#define SW4 (1<<3)
+#define SW5 (1<<4)
+#define SW6 (1<<5)
+#define SW7 (1<<6)
+#define SW8 (1<<7)
 
 extern unsigned char _binary_ppap_raw_start;
 extern unsigned char _binary_ppap_raw_end;
-
-unsigned char *psound = &_binary_ppap_raw_start;
-unsigned char *end = &_binary_ppap_raw_end;
 
 extern unsigned char _binary_PPAPfull_raw_start;
 extern unsigned char _binary_PPAPfull_raw_end;
@@ -38,7 +40,14 @@ extern unsigned char _binary_pinapplePen_raw_end;
 extern unsigned char _binary_pen_raw_start;
 extern unsigned char _binary_pen_raw_end;
 
- #define SETLED(led) ~(1<<led) << 8
+unsigned char *psound = &_binary_ppap_raw_start;
+unsigned char *end = &_binary_ppap_raw_end;
+
+void enableDAC();
+void disableDAC();
+void startLETimer();
+void stopLETimer();
+
 static void gpioHandler(uint8_t input);
 
 /* LETIMER0 interrupt handler */
@@ -71,8 +80,8 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 	
 	if(psound == end){
 		*TIMER1_IEN = 0;
-		disableDAC();
 		*SCR = 0x06;
+		disableDAC();
 	}
 }
 
@@ -108,27 +117,20 @@ static void pinapple(){
 	*TIMER1_IEN = 1;
 	*SCR = 0x00;
 }
-// ahh sound 
+
 static void ahh(){
 	psound = &_binary_ahh_raw_start;
 	end = &_binary_ahh_raw_end;
 	*TIMER1_IEN = 1;
 	*SCR = 0x00;
 }
-//ahh sound 
+
 static void ahhBig(){
 	psound = &_binary_ahhBig_raw_start;
 	end = &_binary_ahhBig_raw_end;
 	*TIMER1_IEN = 1;
 	*SCR = 0x00;
 }
-/* ppap sound 
-static void ppap(){
-	psound = &_binary_ppap_raw_start;
-	end = &_binary_ppap_raw_end;
-	*TIMER1_IEN = 1;
-	*SCR = 0x00;
-}*/
 
 static void PPAPfull(){
 	psound = &_binary_PPAPfull_raw_start;
@@ -186,21 +188,21 @@ void __attribute__ ((interrupt)) EMU_IRQHandler()
 
 static void gpioHandler(uint8_t input){
 	enableDAC();
-	if(input == 2){	//SW2
-		ahh();
-	}else if(input == 0x8){ //SW4
-		ApplePen();
-	}else if(input == 0x20){ //SW6
-		ahhBig();
-	}else if(input == 0x80){
-		PinapplePen();
-	}else if(input == 1){	//SW1
+	if(input == SW1){
 		apple();
-	}else if(input == 0x4){ //SW3
+	}else if(input == SW4){ //SW4
+		ApplePen();
+	}else if(input == SW6){ //SW6
+		ahhBig();
+	}else if(input == SW8){
+		PinapplePen();
+	}else if(input == SW2){	//SW1
+		ahh();
+	}else if(input == SW3){ //SW3
 		pen();
-	}else if(input == 0x10){ //SW5
+	}else if(input == SW5){ //SW5
 		pinapple();
-	}else if(input == 0x40){ //SW5
+	}else if(input == SW7){ //SW5
 		PPAPfull();
 	};
 }

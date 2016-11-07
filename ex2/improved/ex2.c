@@ -13,7 +13,8 @@
 /* The period between sound samples, in clock cycles */
 /* Samples are 8000Hz */
 /* CPU Hz = 48 MHz */
-#define SAMPLE_PERIOD 350
+/* TIMER Hz = 14 MHz */
+#define SAMPLE_PERIOD 325
 
 /* Declaration of peripheral setup functions */
 void setupGPIO();
@@ -42,7 +43,7 @@ int main(void)
 	setupDAC();
 	enableDAC();
 	setupTimer(SAMPLE_PERIOD);
-	setupLETimer();
+	//setupLETimer();
 
 	/* Enable interrupt handling */
 	setupNVIC();
