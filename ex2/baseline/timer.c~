@@ -1,8 +1,8 @@
 #include <stdint.h>
 #include <stdbool.h>
-
 #include "efm32gg.h"
 
+#define   TIMER_FREQUENCY 14000000
 /* function to setup the timer */
 void setupTimer(uint16_t period)
 {
@@ -23,42 +23,9 @@ void setupTimer(uint16_t period)
 	*TIMER1_CMD = 1;
 }
 
-void setupLETimer()
+void setTimer(uint32_t frequency)
 {
-	/* Enable Low Frequency Clock Tree */
-	*CMU_HFPERCLKEN0 |= 0x200;
-	*CMU_LFACLKEN0 |= (1 << 2);
-	/* 32.768Hz Low Frequency (RC) External Oscillator */
-	*CMU_LFCLKSEL |= (1 << 1);
-	*CMU_OSCENCMD |= 0x100;
-	/* Low Frequency A Prescaler Register 0 */
-	*CMU_LFAPRESC0 |= (5 << 8);	//F=LFACLK/32
-
-	*LETIMER0_CMD = 0x2;
-	*LETIMER0_CTRL |= 0x200;
-	*LETIMER0_COMP0 = 1;
-	*LETIMER0_IFC = 0x1f;
-	*LETIMER0_IEN = 0x4;
-}
-
-void startLETimer()
-{
-	*LETIMER0_CMD = 0x1;
-}
-
-void stopLETimer()
-{
-	*LETIMER0_CMD = 0x2;
-}
-
-void enableTimer()
-{
-	*TIMER1_IEN = 1;
-	*TIMER1_CMD = 1;
-}
-
-void disableTimer()
-{
-	*TIMER1_IEN = 0;
-	*TIMER1_CMD = 0;
-}
+	*TIMER1_TOP = TIMER_FREQUENCY / (2 * frequency);	//due to nyquist-theorem about sampling
+	*TIMER1_IEN = 0x1;
+	*TIMER1_CMD = 0x1;
+};

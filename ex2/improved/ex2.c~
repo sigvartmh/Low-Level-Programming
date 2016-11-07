@@ -46,7 +46,7 @@ int main(void)
 	/* Enable interrupt handling */
 	setupNVIC();
 	/* Disable RAM-block 1-3 */
-	disableRAM(0x07);
+	disableRAM(0x07);	
 	/* Sleep mode will be enabled once the start song is finshed */
 	__asm("wfi");
 	return 0;
