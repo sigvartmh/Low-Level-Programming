@@ -16,6 +16,7 @@ struct Player{
     uint16_t x;
     uint16_t y;
     uint16_t len;
+    uint16_t width;
     uint8_t id;
 } player_t;
 
@@ -31,3 +32,4 @@ player_t player1, player2;
 void moveBall(ball_t *ball, player_t player1, player_t player2);
 
 #endif
+

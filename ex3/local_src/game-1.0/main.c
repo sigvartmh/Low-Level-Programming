@@ -131,6 +131,7 @@ i
         .score = 0,
         .x = 4,
         .y = SCREEN_HEIGHT/2,
+        .width = 4,
         .len = 100
     };
 
@@ -139,6 +140,7 @@ i
         .score = 0,
         .x = SCREEN_WIDTH,
         .y = SCREEN_HEIGHT/2,
+        .width = 4,
         .len = 100
     };
 
@@ -164,5 +166,6 @@ i
     //printf("test: %d", screen[0][1]);*/
     return 0;
 }
+
 
 

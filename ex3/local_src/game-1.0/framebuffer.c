@@ -63,7 +63,7 @@ void updateRect(int x, int y, int w, int h) {
 	rect.height	= hRect;
 }
 
-void render(int x, int y, int w, int h, uint16_t col) {
+/*void render(int x, int y, int w, int h, uint16_t col) {
 	updateRect(x, y, w, h);
 	int i = 0;
 	int i2 = 0;
@@ -76,7 +76,7 @@ void render(int x, int y, int w, int h, uint16_t col) {
 	}
 	renderAll();
 	usleep(1000000);
-}
+}*/
 
 void drawRect(int x, int y, int w, int h) {
 	updateRect(x, y, w, h);
@@ -111,13 +111,29 @@ void drawGameBoard(){
 		pixels[i + (SCREEN_HEIGHT-2)*SCREEN_WIDTH] = 0xFFFF;
 		pixels[i + (SCREEN_HEIGHT-3)*SCREEN_WIDTH] = 0xFFFF;
 		pixels[i + (SCREEN_HEIGHT-4)*SCREEN_WIDTH] = 0xFFFF;
-		pixels[i + (SCREEN_HEIGHT-SCREEN_HEIGHT/2)*SCREEN_WIDTH] = 0xFFFF;
+	}
+	
+	for(i = 0; i < SCREEN_HEIGHT; i++) {
+		if(i % 10 > 5) continue;
+		pixels[SCREEN_WIDTH/2 + i*SCREEN_WIDTH] = 0xFFFF;
 	}
 
 	updateRect(0,0, SCREEN_WIDTH, SCREEN_HEIGHT);
 	renderAll();
 }
 
+void render(int x, int y, int w, int h, int col) {
+	uint16_t i, i2;
+	for(i = x; i <= x + w; i++){
+		if(i < 0 || i >= SCREEN_WIDTH) continue;
+		for(i2 = y; i2 < y + h; i2++) {
+			if(i2 < 4 || i2 >= SCREEN_HEIGHT - 4) continue;
+			if(i == SCREEN_WIDTH/2 && i2 % 10 < 5) continue;
+			pixels[i + i2*SCREEN_WIDTH] = col;
+		}
+	}
+	updateRect(x, y, w, h);
+}
 
 void renderBall(ball_t *ball){
 	uint16_t start_x = ball->x;
@@ -126,50 +142,36 @@ void renderBall(ball_t *ball){
 	uint16_t width = 10;
 	uint16_t height = 10;
 	
-	uint16_t i;
-	uint16_t j;
-	
-	for(i = start_y; i <= height+start_y; i++){
-		for(j = start_x; j <= width+start_x; j++){
-			pixels[j + i*SCREEN_WIDTH] = 0x00;
-		}
-	}
-	updateRect(start_x, start_y, width, height);
+	render(start_x, start_y, width, height, 0x00);
 	renderAll();
 
 	moveBall(ball, player1, player2);
 	
-	for(i = ball->y; i <= height+ball->y; i++){
-		for(j = ball->x; j <= width+ball->x; j++){
-			pixels[j + i*SCREEN_WIDTH] = 0xFFFF;
-		}
-	}
-	
-	updateRect(ball->x, ball->y, width, height);
+	render(ball->x, ball->y, width, height, 0xFFFF);
 	renderAll();
-	
-
-	//printf("Ball\n:x:%i,\ty:%i,\tw:%i,\th:%i\n", ball->x, ball->y, ball->dx, ball->dy);
 	
 	usleep(10000);
 }
 
 void renderPlayer(player_t *player, int16_t displacement){
-	uint16_t i;
+	/*uint16_t i;
 	uint16_t j;
-	int y = player->y;
+	int y = player->y;*/
 	
-	for(i = player->y; i <= player->y + player->len/2; i++){
+	/*for(i = player->y; i <= player->y + player->len/2; i++){
 		for(j = player->x-4; j <= player->x; j++){
 			pixels[j + i*SCREEN_WIDTH] = 0x0000;
 			pixels[j + y*SCREEN_WIDTH] = 0x0000;
 			//printf("x: %d, y: %d \n", j, i);
 		}
 		y--;
-	}
+	}*/
+	
+	render(player->x - player->width, player->y - player->len/2, player->width, player->len, 0x00);
+	renderAll();
 	
 	player->y = player->y + displacement;
-	y = player->y;
+	/*y = player->y;
 	
 	for(i = player->y; i <= player->y + player->len/2; i++){
 		for(j = player->x-4; j <= player->x; j++){
@@ -178,9 +180,10 @@ void renderPlayer(player_t *player, int16_t displacement){
 			//printf("x: %d, y: %d \n", j, i);
 		}
 		y--;
-	}
+	}*/
 	
-	updateRect(player->x-4, 0, 4, SCREEN_HEIGHT);
+	render(player->x - player->width, player->y - player->len/2, player->width, player->len, 0xFFFF);
+	//updateRect(player->x-4, 0, 4, SCREEN_HEIGHT);
 	renderAll();
 }
 
@@ -194,3 +197,4 @@ void renderAll() {
 	wRect = -1;
 	hRect = -1;
 }
+
