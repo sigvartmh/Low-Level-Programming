@@ -2,14 +2,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include<string.h>
+#include <string.h>
+#include "pong.h"
 
 //#include <SDL2/SDL.h>
 
 #define BALL_INIT_SPEED 4
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
-#define UINT16_MAX 65535
+//#define UINT16_MAX 65535
 
 typedef
 struct _state {
@@ -25,32 +26,6 @@ struct _state {
     } state;
 } state_t;
 
-typedef
-struct Ball {
-    uint16_t x;
-    uint16_t y;
-    int16_t dx;
-    int16_t dy;
-    int16_t speed;
-} ball_t;
-
-typedef
-struct Player{
-    uint16_t score;
-    uint16_t x;
-    uint16_t y;
-    uint16_t len;
-    uint8_t id;
-} player_t;
-
-typedef
-struct Board {
-    uint16_t max_width;
-    uint16_t max_height;
-} board_t;
-
-ball_t ball;
-player_t player1, player2;
 
 void initBall(ball_t *ball){
 
@@ -76,7 +51,7 @@ uint16_t maskBit(uint8_t startBit, uint8_t endBit)
 
 void hitWall(ball_t *ball, player_t player1, player_t player2){
     if(ball->x == player1.x){
-        if(ball->y > player1.y + player1.len || ball->y < player1.y - player1.len){
+        if(ball->y > player1.y + player1.len/2 || ball->y < player1.y - player1.len/2){
             printf("\nPlayer 1 loose\n");
             player2.score++;
         }else{
@@ -84,7 +59,7 @@ void hitWall(ball_t *ball, player_t player1, player_t player2){
             printf("\nPlayer 1 hit ball\n");
         }
     }else{
-        if(ball->y > player2.y + player2.len || ball->y < player2.y - player2.len){
+        if(ball->y > player2.y + player2.len/2 || ball->y < player2.y - player2.len/2){
             printf("\nplayer 2 loose\n");
             player1.score++;
         }else{
@@ -154,7 +129,7 @@ i
     player1 = (player_t){
         .id = 1,
         .score = 0,
-        .x = 0,
+        .x = 4,
         .y = SCREEN_HEIGHT/2,
         .len = 100
     };

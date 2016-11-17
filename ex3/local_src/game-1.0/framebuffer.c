@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <unistd.h>
 
 #include <linux/fb.h>
 
@@ -9,20 +10,26 @@
 #include <fcntl.h>
 
 #include <sys/mman.h>
+#include <sys/mman.h>
+#include "pong.h"
 
 #define SCREEN_WIDTH 	320
 #define SCREEN_HEIGHT 	240
-#define BITS_PER_PIXEL	2
+#define BYTES_PER_PIXEL	2
 
 int fbfd;
 uint16_t *pixels;
 struct fb_copyarea rect;
 int xRect, yRect, wRect, hRect;
 
+void renderAll();
+
 void initFramebuffer() {
 	fbfd = open("/dev/fb0", O_RDWR);
-	pixels = mmap(0, SCREEN_WIDTH*SCREEN_HEIGHT*BITS_PER_PIXEL, PROT_WRITE, MAP_SHARED, fbfd, 0);
-	
+	pixels = mmap(0, SCREEN_WIDTH*SCREEN_HEIGHT*BYTES_PER_PIXEL, PROT_WRITE | PROT_READ, MAP_SHARED, fbfd, 0);
+	if ((int) pixels == MAP_FAILED) {
+		printf("fbmmap failed\n");
+	}	
 	printf("Successfully init fb\n");
 }
 
@@ -57,6 +64,7 @@ void updateRect(int x, int y, int w, int h) {
 }
 
 void render(int x, int y, int w, int h, uint16_t col) {
+	updateRect(x, y, w, h);
 	int i = 0;
 	int i2 = 0;
 	for(i = 0; i < w; i++) {
@@ -66,13 +74,120 @@ void render(int x, int y, int w, int h, uint16_t col) {
 			pixels[xDraw + yDraw*SCREEN_WIDTH] = col;
 		}
 	}
-	
-	updateRect(x, y, w, h);
+	renderAll();
+	usleep(1000000);
 }
 
-void renderAll() {
+void drawRect(int x, int y, int w, int h) {
+	updateRect(x, y, w, h);
+	int j=0;
+	int i=0;
+	for(i = y; i <= (y+h); i++){
+		for(j = x; j <= (w+x); j++){
+			//printf("i:%d j:%d, sum: %d", i, j, j + i*SCREEN_WIDTH);
+			pixels[j + i*SCREEN_WIDTH] = 0xFFFF;
+		}
+	}
+	/*
+	int i = 0;
+	int i2 = 0;
+	for(i = 0; i < w; i++) {
+		int xDraw = x + i;
+		for(i2 = 0; i2 < h; i2++) {
+			int yDraw = y + i2;
+			pixels[xDraw + yDraw*SCREEN_WIDTH] = 0xFFFF;
+		}
+	}*/
+	renderAll();
+}
 
-	printf("%i,\t%i,\t%i,\t%i\n", rect.dx, rect.dy, rect.width, rect.height);
+void drawGameBoard(){
+	int i;
+
+	for(i = 0; i <= SCREEN_WIDTH; i++){
+		pixels[i + 0*SCREEN_WIDTH] = 0xFFFF;
+		pixels[i + 1*SCREEN_WIDTH] = 0xFFFF;
+		
+		pixels[i + (SCREEN_HEIGHT-2)*SCREEN_WIDTH] = 0xFFFF;
+		pixels[i + (SCREEN_HEIGHT-3)*SCREEN_WIDTH] = 0xFFFF;
+		pixels[i + (SCREEN_HEIGHT-4)*SCREEN_WIDTH] = 0xFFFF;
+		pixels[i + (SCREEN_HEIGHT-SCREEN_HEIGHT/2)*SCREEN_WIDTH] = 0xFFFF;
+	}
+
+	updateRect(0,0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	renderAll();
+}
+
+
+void renderBall(ball_t *ball){
+	uint16_t start_x = ball->x;
+	uint16_t start_y = ball->y;
+	
+	uint16_t width = 10;
+	uint16_t height = 10;
+	
+	uint16_t i;
+	uint16_t j;
+	
+	for(i = start_y; i <= height+start_y; i++){
+		for(j = start_x; j <= width+start_x; j++){
+			pixels[j + i*SCREEN_WIDTH] = 0x00;
+		}
+	}
+	updateRect(start_x, start_y, width, height);
+	renderAll();
+
+	moveBall(ball, player1, player2);
+	
+	for(i = ball->y; i <= height+ball->y; i++){
+		for(j = ball->x; j <= width+ball->x; j++){
+			pixels[j + i*SCREEN_WIDTH] = 0xFFFF;
+		}
+	}
+	
+	updateRect(ball->x, ball->y, width, height);
+	renderAll();
+	
+
+	//printf("Ball\n:x:%i,\ty:%i,\tw:%i,\th:%i\n", ball->x, ball->y, ball->dx, ball->dy);
+	
+	usleep(10000);
+}
+
+void renderPlayer(player_t *player, int16_t displacement){
+	uint16_t i;
+	uint16_t j;
+	int y = player->y;
+	
+	for(i = player->y; i <= player->y + player->len/2; i++){
+		for(j = player->x-4; j <= player->x; j++){
+			pixels[j + i*SCREEN_WIDTH] = 0x0000;
+			pixels[j + y*SCREEN_WIDTH] = 0x0000;
+			//printf("x: %d, y: %d \n", j, i);
+		}
+		y--;
+	}
+	
+	player->y = player->y + displacement;
+	y = player->y;
+	
+	for(i = player->y; i <= player->y + player->len/2; i++){
+		for(j = player->x-4; j <= player->x; j++){
+			pixels[j + i*SCREEN_WIDTH] = 0xFFFF;
+			pixels[j + y*SCREEN_WIDTH] = 0xFFFF;
+			//printf("x: %d, y: %d \n", j, i);
+		}
+		y--;
+	}
+	
+	updateRect(player->x-4, 0, 4, SCREEN_HEIGHT);
+	renderAll();
+}
+
+
+void renderAll() {
+	//thun
+	//printf("Rect\n:x:%i,\ty:%i,\tw:%i,\th:%i\n", rect.dx, rect.dy, rect.width, rect.height);
 	ioctl(fbfd, 0x4680, &rect);
 	xRect = -1;
 	yRect = -1;

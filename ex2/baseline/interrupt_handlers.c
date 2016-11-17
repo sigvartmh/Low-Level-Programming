@@ -21,10 +21,10 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 	 */
 
 	*TIMER1_IFC = 0x1;
-	if (high) {
+	if(high) {
 		*DAC0_CH0DATA = 0;
 		*DAC0_CH1DATA = 0;
-	} else {
+	}else {
 		*DAC0_CH0DATA = amplitude;
 		*DAC0_CH1DATA = amplitude;
 	}

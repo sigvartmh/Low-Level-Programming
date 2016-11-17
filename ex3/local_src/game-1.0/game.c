@@ -19,6 +19,7 @@ int x, y;
 int gamepad;
 uint32_t input;
 
+
 void getInput() {
 	int err = read(gamepad, &input, 4);
 	if(err == -1) {
@@ -70,20 +71,26 @@ int main(int argc, char *argv[]) {
 	initFramebuffer();
 	clear();
 	gameMain();
+	drawGameBoard();
+	renderPlayer(&player1,0);
+	renderPlayer(&player2,0);
+	//drawRect(SCREEN_WIDTH/2,SCREEN_HEIGHT/2,40,40);
 	
 	input = 0xFFFF;
 	int counter = 0;
 	while(1) {
-		counter = (counter + 1) % 4;
-		render(ball.x, ball.y, 4, 4, 0x0);
-		moveBall(&ball, player1, player2);
-		render(ball.x, ball.y, 4, 4, 0xFFFF);
-		renderAll();
+		//counter = (counter + 1) % 4;
+		//render(ball.x, ball.y, 4, 4, 0x0);
+		//moveBall(&ball, player1, player2);
+		//render(ball.x, ball.y, 4, 4, 0xFFFF);
+		//renderAll();
+		renderBall(&ball);
+		
 		if(counter == 0) {
-			/*if(isPressed(2)) x += 1;
-			if(isPressed(0)) x -= 1;
-			if(isPressed(3)) y += 1;
-			if(isPressed(1)) y -= 1;*/
+			if(isPressed(3)) renderPlayer(&player1, 5);
+			if(isPressed(1)) renderPlayer(&player1, -5);
+			if(isPressed(5)) renderPlayer(&player2, 5);
+			if(isPressed(7)) renderPlayer(&player2, -5);
 			
 			//if(isPresse)
 		}
