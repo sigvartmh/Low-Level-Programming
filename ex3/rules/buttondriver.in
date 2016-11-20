@@ -1,0 +1,8 @@
+## SECTION=project_specific
+
+config BUTTONDRIVER
+	tristate
+	select KERNEL
+	prompt "buttondriver"
+	help
+	  FIXME

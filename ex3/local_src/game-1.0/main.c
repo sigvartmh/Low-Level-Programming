@@ -137,7 +137,7 @@ i
     player2 = (player_t){
         .id = 2,
         .score = 0,
-        .x = SCREEN_WIDTH,
+        .x = SCREEN_WIDTH-1,
         .y = SCREEN_HEIGHT/2,
         .len = 100
     };

@@ -1,0 +1,7 @@
+## SECTION=project_specific
+
+config FLYBY
+	tristate
+	prompt "flyby"
+	help
+	  FIXME
