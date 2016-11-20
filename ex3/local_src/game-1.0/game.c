@@ -89,8 +89,8 @@ int main(int argc, char *argv[]) {
 		if(counter == 0) {
 			if(isPressed(3)) renderPlayer(&player1, 5);
 			if(isPressed(1)) renderPlayer(&player1, -5);
-			if(isPressed(5)) renderPlayer(&player2, 5);
-			if(isPressed(7)) renderPlayer(&player2, -5);
+			if(isPressed(7)) renderPlayer(&player2, 5);
+			if(isPressed(5)) renderPlayer(&player2, -5);
 			
 			//if(isPresse)
 		}
@@ -109,3 +109,4 @@ int main(int argc, char *argv[]) {
 
 	exit(EXIT_SUCCESS);
 }
+
