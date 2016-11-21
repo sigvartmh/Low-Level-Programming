@@ -10,3 +10,6 @@ mount -t sysfs sys /sys
 
 export PATH=$PATH:/sbin:/usr/bin:/bin
 exec /bin/sh
+
+modprobe driver-gamepad
+echo 0 > /sys/class/graphics/fbcon/cursor_blink

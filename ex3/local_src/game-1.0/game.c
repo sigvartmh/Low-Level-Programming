@@ -13,20 +13,21 @@
 #include <unistd.h>
 
 #include "framebuffer.c"
-#include "main.c"
+#include "pong.c"
 
-int x, y;
 int gamepad;
 uint32_t input;
 
-
+/* Callback function to be registred on signal */
 void getInput() {
 	int err = read(gamepad, &input, 4);
 	if(err == -1) {
-		printf("%i\n", errno);
+		//printf("%i\n", errno);
+		exit(EXIT_FAILURE);
 	}
-	printf("%x\n", input);
+	//printf("%x\n", input);
 }
+
 
 int initGamepad() {
 	gamepad = open("/dev/Gamepad", O_RDWR);
@@ -56,6 +57,7 @@ int initGamepad() {
 	return 1;
 }
 
+/* Checks the value of which button is pressed */
 int isPressed(pos) {
 	return (~input >> pos) & 0x1;
 }
@@ -64,45 +66,45 @@ int main(int argc, char *argv[]) {
 	printf("Loading game...\n");
 	
 	if(initGamepad() < 0) return -1;
-	
-	x = 0;
-	y = 0;
-	
 	initFramebuffer();
+
 	clear();
-	gameMain();
+	initGame();
 	drawGameBoard();
 	renderPlayer(&player1,0);
 	renderPlayer(&player2,0);
-	//drawRect(SCREEN_WIDTH/2,SCREEN_HEIGHT/2,40,40);
-	
+	drawBall(&ball, 0xFFFF);
 	input = 0xFFFF;
-	int counter = 0;
+	
 	while(1) {
-		//counter = (counter + 1) % 4;
-		//render(ball.x, ball.y, 4, 4, 0x0);
-		//moveBall(&ball, player1, player2);
-		//render(ball.x, ball.y, 4, 4, 0xFFFF);
-		//renderAll();
-		renderBall(&ball);
-		
-		if(counter == 0) {
+		if(gamestate.state == STATE_INITIAL){
+			if(isPressed(0)){
+				gamestate.state = STATE_GAME;
+				drawBall(&ball, 0x0000);
+			}
+		}
+		else if(gamestate.state == STATE_RESET){
+						
+			sleep(3);
+			render(ball.x, ball.y, 10, 10, 0x0000);
+			resetGame();
+			clear();
+			drawGameBoard();
+			renderPlayer(&player1,0);
+			renderPlayer(&player2,0);
+			drawBall(&ball, 0xFFFF);
+			gamestate.state = STATE_INITIAL;
+		}else{
+			/* Check which buttons are pressed and move player accordingly */
 			if(isPressed(3)) renderPlayer(&player1, 5);
 			if(isPressed(1)) renderPlayer(&player1, -5);
 			if(isPressed(7)) renderPlayer(&player2, 5);
 			if(isPressed(5)) renderPlayer(&player2, -5);
-			
-			//if(isPresse)
+			renderBall(&ball);
+			usleep(50000);
 		}
 		
 		if(isPressed(4)) break;
-		
-		if(x + 16 > SCREEN_WIDTH) x = SCREEN_WIDTH - 16;
-		if(y + 16 > SCREEN_HEIGHT) y = SCREEN_HEIGHT - 16;
-		if(x < 0) x = 0;
-		if(y < 0) y = 0;
-		
-		//renderAll();
 	}
 	
 	printf("Ending game...\n");

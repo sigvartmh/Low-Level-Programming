@@ -23,17 +23,22 @@ struct fb_copyarea rect;
 int xRect, yRect, wRect, hRect;
 
 void renderAll();
+void drawBall(ball_t *ball, uint16_t color);
+void render(int x, int y, int w, int h, int col);
 
 void initFramebuffer() {
 	fbfd = open("/dev/fb0", O_RDWR);
 	pixels = mmap(0, SCREEN_WIDTH*SCREEN_HEIGHT*BYTES_PER_PIXEL, PROT_WRITE | PROT_READ, MAP_SHARED, fbfd, 0);
-	if ((int) pixels == MAP_FAILED) {
-		printf("fbmmap failed\n");
+	if (pixels == NULL) {
+		printf("fb mmap failed\n");
 	}	
 	printf("Successfully init fb\n");
 }
 
+/*Clear the screen and remove the fb cursor blink */
 void clear() {
+	int cursor = open("/sys/class/graphics/fbcon/cursor_blink", O_RDWR);
+	write(cursor, NULL, 1);
 	int i;
 	for(i = 0; i < SCREEN_WIDTH*SCREEN_HEIGHT; i++) {pixels[i] = 0x0;}
 	rect.dx 		= 0;
@@ -43,6 +48,7 @@ void clear() {
 	ioctl(fbfd, 0x4680, &rect);
 }
 
+/* Updates the rectangle smallest area needed to render the changes */
 void updateRect(int x, int y, int w, int h) {
 	if(xRect == -1) {
 		xRect		= x;
@@ -63,21 +69,7 @@ void updateRect(int x, int y, int w, int h) {
 	rect.height	= hRect;
 }
 
-/*void render(int x, int y, int w, int h, uint16_t col) {
-	updateRect(x, y, w, h);
-	int i = 0;
-	int i2 = 0;
-	for(i = 0; i < w; i++) {
-		int xDraw = x + i;
-		for(i2 = 0; i2 < h; i2++) {
-			int yDraw = y + i2;
-			pixels[xDraw + yDraw*SCREEN_WIDTH] = col;
-		}
-	}
-	renderAll();
-	usleep(1000000);
-}*/
-
+/* Draws a rectangel in position x, y with widht and height w,h */
 void drawRect(int x, int y, int w, int h) {
 	updateRect(x, y, w, h);
 	int j=0;
@@ -87,27 +79,22 @@ void drawRect(int x, int y, int w, int h) {
 			pixels[j + i*SCREEN_WIDTH] = 0xFFFF;
 		}
 	}
-	/*
-	int i = 0;
-	int i2 = 0;
-	for(i = 0; i < w; i++) {
-		int xDraw = x + i;
-		for(i2 = 0; i2 < h; i2++) {
-			int yDraw = y + i2;
-			pixels[xDraw + yDraw*SCREEN_WIDTH] = 0xFFFF;
-		}
-	}*/
+	updateRect(0,0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	renderAll();
+}
+
+void drawBall(ball_t *ball, uint16_t color){
+	render(ball->x-5, ball->y, 10, 10, color);
 	renderAll();
 }
 
 void drawGameBoard(){
 	int i;
 
-	for(i = 0; i <= SCREEN_WIDTH; i++){
+	for(i = board.min_width; i <= board.max_width; i++){
 		pixels[i + 0*SCREEN_WIDTH] = 0xFFFF;
 		pixels[i + 1*SCREEN_WIDTH] = 0xFFFF;
 		
-		pixels[i + (SCREEN_HEIGHT-2)*SCREEN_WIDTH] = 0xFFFF;
 		pixels[i + (SCREEN_HEIGHT-3)*SCREEN_WIDTH] = 0xFFFF;
 		pixels[i + (SCREEN_HEIGHT-4)*SCREEN_WIDTH] = 0xFFFF;
 	}
@@ -134,6 +121,9 @@ void render(int x, int y, int w, int h, int col) {
 	updateRect(x, y, w, h);
 }
 
+
+
+// Renders and move the ball onto the screen
 void renderBall(ball_t *ball){
 	uint16_t start_x = ball->x;
 	uint16_t start_y = ball->y;
@@ -146,46 +136,18 @@ void renderBall(ball_t *ball){
 
 	moveBall(ball, player1, player2);
 	
-	render(ball->x, ball->y, width, height, 0xFFFF);
+	render(ball->x, ball->y, width, height, rand());
 	renderAll();
-	
-	usleep(10000);
 }
 
 void renderPlayer(player_t *player, int16_t offset){
-	/*uint16_t i;
-	uint16_t j;
-	int y = player->y;*/
-	
-	/*for(i = player->y; i <= player->y + player->len/2; i++){
-		for(j = player->x-4; j <= player->x; j++){
-			pixels[j + i*SCREEN_WIDTH] = 0x0000;
-			pixels[j + y*SCREEN_WIDTH] = 0x0000;
-			//printf("x: %d, y: %d \n", j, i);
-		}
-		y--;
-	}*/
-	
+
 	render(player->x - player->width, player->y - player->len/2, player->width, player->len, 0x00);
 	movePlayer(player, offset);
-	renderAll();
-
-	/*y = player->y;
-	
-	for(i = player->y; i <= player->y + player->len/2; i++){
-		for(j = player->x-4; j <= player->x; j++){
-			pixels[j + i*SCREEN_WIDTH] = 0xFFFF;
-			pixels[j + y*SCREEN_WIDTH] = 0xFFFF;
-			//printf("x: %d, y: %d \n", j, i);
-		}
-		y--;
-	}*/
-	
 	render(player->x - player->width, player->y - player->len/2, player->width, player->len, 0xFFFF);
-	//updateRect(player->x-4, 0, 4, SCREEN_HEIGHT);
+	updateRect(player->x-4, 0, 4, SCREEN_HEIGHT);
 	renderAll();
 }
-
 
 void renderAll() {
 	//thun

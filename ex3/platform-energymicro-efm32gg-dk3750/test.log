@@ -1,300 +1,140 @@
 =====
-Mon Nov  7 16:02:57 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-all'
+Mon Nov 21 20:41:13 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-all'
 =====
 
 =====
-Mon Nov  7 16:29:24 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-all'
+Mon Nov 21 20:45:31 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 09:27:33 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-all'
+Mon Nov 21 20:47:54 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 09:40:55 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 20:55:49 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 09:42:00 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:00:06 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 09:49:10 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:01:37 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 09:53:51 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:02:41 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 11:00:32 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:04:19 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 11:02:08 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:07:45 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 11:10:14 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:11:35 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 11:13:54 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:21:14 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 11:23:27 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:22:09 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 11:31:18 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:25:28 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 11:31:41 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:27:50 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 13:24:09 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:31:10 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 13:26:24 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:35:00 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 13:36:59 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:36:24 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:12:14 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:40:17 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:13:17 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:40:59 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:14:38 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:43:11 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:16:24 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:45:19 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:18:16 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:47:13 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:19:34 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:49:17 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:20:51 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:57:17 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:23:05 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 21:58:43 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:28:49 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 22:02:43 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:29:37 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 22:05:15 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:31:46 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 22:07:30 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:33:29 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 22:08:34 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:39:07 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 22:09:29 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:42:14 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 22:10:26 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:45:02 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 22:13:36 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:45:40 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 22:16:16 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:46:58 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
+Mon Nov 21 22:17:22 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
 =====
-Thu Nov 17 14:47:20 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 14:47:37 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-all'
-=====
-
-=====
-Thu Nov 17 14:47:52 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-all'
-=====
-
-=====
-Thu Nov 17 14:47:56 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-all'
-=====
-
-=====
-Thu Nov 17 14:48:05 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-all'
-=====
-
-=====
-Thu Nov 17 14:49:10 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 14:52:03 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 14:53:40 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 14:54:50 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 14:55:37 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:14:06 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:16:49 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:20:08 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:24:23 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:25:58 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:26:30 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:28:19 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:30:12 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:33:05 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:34:20 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:35:28 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:37:11 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:40:42 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:41:20 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:46:12 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:47:12 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:48:26 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:49:26 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:51:06 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:52:45 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 15:55:08 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 16:31:27 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 16:31:49 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 16:46:12 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 16:48:24 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 16:50:08 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 17:02:19 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 17:04:35 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Thu Nov 17 17:18:51 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-=====
-Mon Nov 21 16:00:47 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
-=====
-
-                                                                                                                   =====
-Mon Nov 21 16:32:42 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-all'
+Mon Nov 21 22:36:23 CET 2016: Starting test '/home/tdt4258/Low-Level-Programming/ex3/tests/flash-rootfs'
 =====
 
