@@ -41,6 +41,7 @@ static int my_release(struct inode *inode, struct file *filp) {
 }
 
 static ssize_t my_read(struct file *filp, char __user *buff, size_t count, loff_t *offp) {
+	//Read GPIO data
 	uint32_t data = ioread32(GPIO_PC_DIN);
 	copy_to_user(buff, &data, 4);
 	return 4;
@@ -65,10 +66,9 @@ static struct file_operations my_fops = {
 };
 
 irqreturn_t gpio_interrupt_handler(int irq, void *devID, struct pt_regs *regs) {
+	//Handle interrupt
 	iowrite32(ioread32(GPIO_IF), GPIO_IFC);
-	if(async_queue) {
-		kill_fasync(&async_queue, SIGIO, POLL_IN);
-	}
+	if(async_queue) {kill_fasync(&async_queue, SIGIO, POLL_IN);}
 	return IRQ_HANDLED;
 }
 
@@ -85,12 +85,14 @@ irqreturn_t gpio_interrupt_handler(int irq, void *devID, struct pt_regs *regs) {
 static int __init template_init(void) {
 	printk("Loading gamepad module...\n");
 	
+	//Allocate device number
 	int allocationStatus = alloc_chrdev_region(&devnr, 0, 1, DRIVER_NAME);
 	if(allocationStatus < 0) {
 		printk("Failed to allocate device numbers\n");
 		return -1;
 	}
 	
+	//Request access to GPIO ports
 	if(request_mem_region(GPIO_PC_MODEL, 1, DRIVER_NAME) == NULL) {
 		printk("Failed to map memory region GPIO_PC_MODEL\n");
 		return -1;
@@ -106,6 +108,7 @@ static int __init template_init(void) {
 		return -1;
 	}
 	
+	//Init hardware
 	iowrite32(0x33333333, GPIO_PC_MODEL);
 	iowrite32(0xFF, GPIO_PC_DOUT);
 	
@@ -115,9 +118,11 @@ static int __init template_init(void) {
 	iowrite32(0xFF, GPIO_IEN);
 	iowrite32(0x802, ISER0);
 	
+	//Setup interrupts
 	request_irq(GPIO_IRQODD, (irq_handler_t)gpio_interrupt_handler, 0, DRIVER_NAME, &devnr);
 	request_irq(GPIO_IRQEVEN, (irq_handler_t)gpio_interrupt_handler, 0, DRIVER_NAME, &devnr);
 	
+	//Add device
 	cdev_init(&my_cdev, &my_fops);
 	my_cdev.owner = THIS_MODULE;
 	int err = cdev_add(&my_cdev, devnr, 1);
