@@ -86,10 +86,9 @@ void moveBall(ball_t *ball, player_t player1, player_t player2){
 }
 
 
-void movePlayer(player_t *player, uint16_t offset){
+void movePlayer(player_t *player, int16_t offset){
     if((player->y + player->len/2 + offset) > SCREEN_HEIGHT
         || (player->y - player->len/2 + offset) < 0){
-        //do nothing
     }else{
         player->y = player->y + offset;
     }

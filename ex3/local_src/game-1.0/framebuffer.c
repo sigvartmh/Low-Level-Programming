@@ -84,7 +84,6 @@ void drawRect(int x, int y, int w, int h) {
 	int i=0;
 	for(i = y; i <= (y+h); i++){
 		for(j = x; j <= (w+x); j++){
-			//printf("i:%d j:%d, sum: %d", i, j, j + i*SCREEN_WIDTH);
 			pixels[j + i*SCREEN_WIDTH] = 0xFFFF;
 		}
 	}
@@ -153,7 +152,7 @@ void renderBall(ball_t *ball){
 	usleep(10000);
 }
 
-void renderPlayer(player_t *player, int16_t displacement){
+void renderPlayer(player_t *player, int16_t offset){
 	/*uint16_t i;
 	uint16_t j;
 	int y = player->y;*/
@@ -168,9 +167,9 @@ void renderPlayer(player_t *player, int16_t displacement){
 	}*/
 	
 	render(player->x - player->width, player->y - player->len/2, player->width, player->len, 0x00);
+	movePlayer(player, offset);
 	renderAll();
-	
-	player->y = player->y + displacement;
+
 	/*y = player->y;
 	
 	for(i = player->y; i <= player->y + player->len/2; i++){
